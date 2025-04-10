@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      target: runner
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  # Add more services as needed (e.g., database, cache, etc.)
+
+networks:
+  app-network:
+    driver: bridge
